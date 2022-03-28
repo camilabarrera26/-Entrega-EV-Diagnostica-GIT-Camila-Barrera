@@ -32,3 +32,21 @@ def most_tweets_day(data):
             break
         print(i)
         count += 1
+
+def most_used_hashtag(data):
+    content = []
+    for contents in data["content"]:
+        content.append(contents)
+    hashtags = []
+    for i in range(0, len(content)):
+        hashtag = re.findall(r'#(\w+)', content[i])
+        for h in hashtag:
+            hashtags.append(h)
+    hashtags_count = dict(Counter(hashtags))
+    sorted_hashtags_count = dict(sorted(hashtags_count.items(), key=operator.itemgetter(1), reverse=True))
+    count = 0
+    for i in sorted_hashtags_count:
+        if count == 10:
+            break
+        print(i)
+        count += 1
